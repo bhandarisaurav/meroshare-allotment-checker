@@ -1,14 +1,19 @@
 import time
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
 
-options = Options()
-options.headless = True
+GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--no-sandbox')
+chrome_options.binary_location = GOOGLE_CHROME_PATH
 
 
 def get_allotted_stock_from_boid(boid_list=['1301090000394531', '1301090000382579']):
     response = {}
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Chrome(
+        execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
     driver.get("https://www.sharesansar.com/ipo-result")
     boid_element = driver.find_element_by_id("boid")
     for boid in boid_list:
