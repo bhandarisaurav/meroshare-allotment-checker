@@ -187,6 +187,57 @@
           bottom: 100%;
         }
       }
+      select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        outline: 0;
+        box-shadow: none;
+        border: 0 !important;
+        background: #2c3e50;
+        background-image: none;
+      }
+      /* Remove IE arrow */
+      select::-ms-expand {
+        display: none;
+      }
+      /* Custom Select */
+      .select {
+        position: relative;
+        display: flex;
+        width: 10em;
+        height: 3em;
+        line-height: 3;
+        background: #2c3e50;
+        overflow: hidden;
+        border-radius: 0.25em;
+        margin-left: auto;
+      }
+      select {
+        flex: 1;
+        padding: 0 0.5em;
+        color: #fff;
+        cursor: pointer;
+      }
+      /* Arrow */
+      .select::after {
+        content: '\25BC';
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0 1em;
+        background: #34495e;
+        cursor: pointer;
+        pointer-events: none;
+        -webkit-transition: 0.25s all ease;
+        -o-transition: 0.25s all ease;
+        transition: 0.25s all ease;
+      }
+      /* Transition */
+      .select:hover::after {
+        color: #f39c12;
+      }
     </style>
   </head>
   <body>
@@ -195,16 +246,33 @@
       <h5>Please add multiple BOID seperated by comma(,)</h5>
       <form method="GET" action="/allotment-check" id="meroShareAllotmentForm">
         <div class="user-box">
-          <input type="text" name="boid" required="true" />
+          <input type="text" name="boid" required="true" id="boid" />
           <label>BOID's</label>
         </div>
-        <a href="#" id="meroShareAllotmentFormSubmit">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          Submit
-        </a>
+        <div style="display: inline-flex; width: 100%">
+          <a href="#" id="meroShareAllotmentFormSubmit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit
+          </a>
+          <div class="select">
+            <select
+              style="float: right; height: 30px; margin-top: 10px"
+              id="select"
+            >
+              <option selected>Select Name</option>
+              <option value="saurav">Saurav</option>
+              <option value="srijana">Srijana</option>
+              <option value="subham">Subham</option>
+              <option value="kusumakar">Kusumakar</option>
+              <option value="prashant">Prashant</option>
+              <option value="milan">Milan</option>
+              <option value="asmita">Asmita</option>
+            </select>
+          </div>
+        </div>
       </form>
     </div>
     <div class="fakeLoader"></div>
@@ -218,6 +286,25 @@
         $('.fakeLoader').show();
         $.fakeLoader({ timeToHide: 100000000 });
         $('#meroShareAllotmentForm').submit();
+      });
+
+      $('#select').on('change', function (e) {
+        var names = {
+          saurav: [1301090000394531, 1301090000382579],
+          srijana: [1301040000281317],
+          subham: [
+            1301420000066265,
+            1301420000066271,
+            1301420000066284,
+            1301420000066299,
+          ],
+          kusumakar: [],
+          prashant: [1301370000214884],
+          milan: [1301730000356518],
+          asmita: [1301040000855383],
+        };
+        console.log(names[e.target.value].join(','));
+        $('#boid').val(names[e.target.value].join(','));
       });
     </script>
   </body>

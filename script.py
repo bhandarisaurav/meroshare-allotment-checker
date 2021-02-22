@@ -16,7 +16,8 @@ chrome_options.binary_location = GOOGLE_CHROME_BIN
 
 
 def get_allotted_stock_from_boid(boid_list=['1301090000394531', '1301090000382579']):
-    response = {}
+    boid_response = {}
+    final_response = {}
     driver = None
     if(os.environ['APP_SETTINGS'] == "config.DevelopmentConfig"):
         driver = webdriver.Firefox(options=firefox_options)
@@ -29,16 +30,20 @@ def get_allotted_stock_from_boid(boid_list=['1301090000394531', '130109000038257
         boid_element.clear()
         boid_element.send_keys(boid)
         driver.find_element_by_id("searchipo").click()
+        company_name = driver.find_element_by_id(
+            "companyid").text.split("\n")[0]
         time.sleep(1)
         try:
             share_result = driver.find_element_by_css_selector(
                 '#iporesult>div>table>tbody>tr>td:nth-child(4)')
-            response[boid] = share_result.text
+            boid_response[boid] = share_result.text
         except:
-            response[boid] = "Not Alotted"
+            boid_response[boid] = "Not Alotted"
     driver.quit()
-    print(response)
-    return response
+    final_response["company_name"] = company_name
+    final_response["boid_results"] = boid_response
+    print(final_response)
+    return final_response
 
 
 # get_allotted_stock_from_boid()
