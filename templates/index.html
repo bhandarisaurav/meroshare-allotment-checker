@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meroshare Allotment Checker</title>
+    <link href="static/fakeLoader.min.css" rel="stylesheet" />
+    <link href="static/app.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="meroShareAllotmentChecker-box">
+      <h2>Mero Share Allotment Checker</h2>
+      <h5>Please add multiple BOID seperated by comma(,)</h5>
+      <form method="GET" action="/allotment-check" id="meroShareAllotmentForm">
+        <div class="user-box">
+          <input type="text" name="boid" required="true" id="boid" />
+          <label>BOID's</label>
+        </div>
+        <div style="display: inline-flex; width: 100%">
+          <a href="#" id="meroShareAllotmentFormSubmit">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            Submit
+          </a>
+          <div class="select">
+            <select
+              style="float: right; height: 30px; margin-top: 10px"
+              id="select"
+            >
+              <option selected>Select Name</option>
+              <option value="saurav">Saurav</option>
+              <option value="srijana">Srijana</option>
+              <option value="subham">Subham</option>
+              <option value="kusumakar">Kusumakar</option>
+              <option value="prashant">Prashant</option>
+              <option value="milan">Milan</option>
+              <option value="asmita">Asmita</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="fakeLoader"></div>
+
+    <script src="static/jquery-3.5.1.min.js"></script>
+    <script src="static/fakeLoader.min.js"></script>
+
+    <script>
+      $('.fakeLoader').hide();
+      $('#meroShareAllotmentFormSubmit').click(function () {
+        $('.fakeLoader').show();
+        $.fakeLoader({ timeToHide: 100000000 });
+        $('#meroShareAllotmentForm').submit();
+      });
+
+      $('#select').on('change', function (e) {
+        var names = {
+          saurav: [1301090000394531, 1301090000382579],
+          srijana: [1301040000281317],
+          subham: [
+            1301420000066265,
+            1301420000066271,
+            1301420000066284,
+            1301420000066299,
+          ],
+          kusumakar: [],
+          prashant: [1301370000214884],
+          milan: [1301730000356518],
+          asmita: [1301040000855383],
+        };
+        console.log(names[e.target.value].join(','));
+        $('#boid').val(names[e.target.value].join(','));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mero Share Result</title>
+    <link href="static/result.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="main-wrapper">
+  <main role="main">
+    <div class="table-card">
+      <div class="container">
+        <h1 class="table-title">{{data.company_name}}</h1>
+        <div class="table-scroll">
+          <div class="table-wrapper">
+            <table class="sticky-table">
+              <colgroup>
+                <col class="table-col1">
+                <col class="table-col2">
+                <col class="table-col3">
+              </colgroup>
+              <thead class="table-head" title="Click to sort">
+                <tr class="table-row">
+                  <th class="col-head" scope="col">SN</th>
+                  <th class="col-head" scope="col">BOID</th>
+                  <th class="col-head" scope="col">STATUS</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                {% for item in data.boid_results %}
+                    <tr class="table-row">
+                    <td class="cell">{{loop.index}}</td>
+                    <td class="cell">{{item}}</td>
+                    <td class="cell">{{data.boid_results[item]}}</td>
+                    </tr>   
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
+</body>
+</html>
